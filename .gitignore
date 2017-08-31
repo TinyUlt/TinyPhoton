@@ -1,0 +1,5 @@
+/Library/
+/myexe_Data/
+*.exe
+/Temp/
+/obj/
