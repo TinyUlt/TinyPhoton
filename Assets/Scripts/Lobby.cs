@@ -4,27 +4,18 @@ using Photon.Hive.Operations;
 using ExitGames.Client.Photon;
 using Photon.LoadBalancing.Events;
 using UnityEngine.UI;
-public class Lobby : MonoBehaviour, IPanelManager,IGameClientPeer
+public class Lobby : PeerPanel
 {
-    //
     public GameObject RoomInfoPanelForCopy;
     public InputField InputField_CreateRoom;
-    PanelManager panelManager;
-    GameClientPeer gameClient;
-
+  
     string RoomId;
-    public void SetPanelManager(PanelManager instance)
-    {
-        panelManager = instance;
-    }
-    public void OnPanelOpenMessage(object message)
+  
+    override public void OnPanelOpenMessage(object message)
     {
         RoomInfoPanelForCopy.SetActive(false);
     }
-    public void SetGameClientPeer(GameClientPeer instance)
-    {
-        gameClient = instance;
-    }
+   
     private void OnEnable()
     {
         if(gameClient == null)

@@ -18,7 +18,6 @@ public class PanelManager : MonoBehaviour {
                 Ipm.SetPanelManager(this);
             }
         }
-       
     }
     // Use this for initialization
     void Start () {

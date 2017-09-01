@@ -1,36 +1,22 @@
 ﻿
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.UI;
 using Photon.Hive.Operations;
 using ExitGames.Client.Photon;
 using Photon.LoadBalancing.Events;
 
-
-
-public class Login : MonoBehaviour, IPanelManager, IGameClientPeer
+public class Login : PeerPanel
 {
-
-    PanelManager panelManager;
-    GameClientPeer gameClient;
-
     public string IpAddress = "192.168.1.9:4530";
     public InputField InputField_Account;
     public InputField InputField_Password;
-
-    public void SetPanelManager(PanelManager instance)
-    {
-        panelManager = instance;
-    }
-    public void OnPanelOpenMessage(object message)
+ 
+    override public void OnPanelOpenMessage(object message)
     {
         gameClient.ConnectToServer(IpAddress);
     }
-    public void SetGameClientPeer(GameClientPeer instance)
-    {
-        gameClient = instance;
-    }
+   
     private void OnEnable()
     {
         if (gameClient == null)
@@ -78,7 +64,6 @@ public class Login : MonoBehaviour, IPanelManager, IGameClientPeer
     }
     public void OnOperationResponse(OperationResponse operationResponse)
     {
-
         switch (operationResponse.OperationCode)
         {
             case (byte)OperationCode.Authenticate:
@@ -100,6 +85,4 @@ public class Login : MonoBehaviour, IPanelManager, IGameClientPeer
                 }
         }
     }
-
-   
 }

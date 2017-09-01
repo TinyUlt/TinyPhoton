@@ -5,17 +5,12 @@ using UnityEngine;
 using Photon.Hive.Operations;
 using ExitGames.Client.Photon;
 using Photon.LoadBalancing.Events;
-public class Room : MonoBehaviour, IPanelManager, IGameClientPeer
+public class Room : PeerPanel
 {
-    PanelManager panelManager;
-    GameClientPeer gameClient;
     string RoomId;
     OperationCode Operation;
-    public void SetPanelManager(PanelManager instance)
-    {
-        panelManager = instance;
-    }
-    public void OnPanelOpenMessage(object message)
+   
+    override public void OnPanelOpenMessage(object message)
     {
         Hashtable table = message as Hashtable;
         string ip = table["ip"] as string;
@@ -23,10 +18,7 @@ public class Room : MonoBehaviour, IPanelManager, IGameClientPeer
         Operation =(OperationCode) table["operation"];
         gameClient.ConnectToServer(ip);
     }
-    public void SetGameClientPeer(GameClientPeer instance)
-    {
-        gameClient = instance;
-    }
+   
     private void OnEnable()
     {
         if (gameClient == null)
