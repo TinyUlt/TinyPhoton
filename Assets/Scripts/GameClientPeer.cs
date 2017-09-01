@@ -35,7 +35,7 @@ public class GameClientPeer : MonoBehaviour , IPhotonPeerListener
     {
         if (connectCallback == null)
         {
-            Debug.LogError("未注册连接成功回调:");
+            Debug.LogWarning("未注册连接成功回调:");
         }
         else
         {
@@ -58,9 +58,14 @@ public class GameClientPeer : MonoBehaviour , IPhotonPeerListener
         if (OperationResponseContain.ContainsKey(code))
         {
             OperationResponseContain[code] -= callback;
+
+            if(OperationResponseContain[code] == null)
+            {
+                OperationResponseContain.Remove(code);
+            }
         }else
         {
-            Debug.LogError("未注册消息:" + code.ToString());
+            Debug.LogWarning("未注册消息:" + code.ToString());
         }
        
     }
@@ -80,10 +85,15 @@ public class GameClientPeer : MonoBehaviour , IPhotonPeerListener
         if (EventDataContain.ContainsKey(code))
         {
             EventDataContain[code] -= callback;
+
+            if (EventDataContain[code] == null)
+            {
+                EventDataContain.Remove(code);
+            }
         }
         else
         {
-            Debug.LogError("未注册事件:" + code.ToString());
+            Debug.LogWarning("未注册事件:" + code.ToString());
         }
     }
     private void Awake()
