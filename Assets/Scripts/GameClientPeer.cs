@@ -147,7 +147,7 @@ public class GameClientPeer : MonoBehaviour , IPhotonPeerListener
 
     public void OnEvent(EventData eventData)
     {
-        Debug.Log("触发了事件：" + eventData.ToStringFull());
+        Debug.Log("触发了事件：" +(EventCode)eventData.Code +" "+ eventData.ToStringFull());
         EventCode code = (EventCode)eventData.Code;
         if (EventDataContain.ContainsKey(code) && EventDataContain[code]!=null)
         {
@@ -160,7 +160,7 @@ public class GameClientPeer : MonoBehaviour , IPhotonPeerListener
 
     public void OnOperationResponse(OperationResponse operationResponse)
     {
-        Debug.Log("返回消息：" + operationResponse.ToStringFull());
+        Debug.Log("返回消息：" +(OperationCode)operationResponse.OperationCode + " "+ operationResponse.ToStringFull());
         OperationCode code = (OperationCode)operationResponse.OperationCode;
         if (OperationResponseContain.ContainsKey(code))
         {
