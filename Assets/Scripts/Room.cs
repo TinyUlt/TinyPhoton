@@ -75,6 +75,7 @@ public class Room : PeerPanel
         request.OperationCode = (byte)OperationCode.CreateGame;
         request.Parameters = new Dictionary<byte, object>();
         request.Parameters.Add((byte)ParameterKey.GameId, roomId);
+        request.Parameters.Add((byte)ParameterKey.PublishUserId, true);
         gameClient.SendMessage(request);
     }
     public void OnJoinRoom(string roomId)
